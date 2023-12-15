@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests" thread-count="2">
+	<test name="Chrome">
+		<parameter name="browserName" value="Chrome" />
+		<parameter name="systemPort" value="10000" />
+		<classes>
+			<class name="com.aktivo.runner.NewDevelopmentRunnerTest"/>
+		</classes>
+	</test>
+	<!--<test name="Chrome">
+		<parameter name="browserName" value="Chrome" />
+		<parameter name="systemPort" value="10002" />
+		<classes>
+			<class name="com.aktivo.runner.SanityRunnerTest"/>
+		</classes>
+	</test>-->
+</suite>
+

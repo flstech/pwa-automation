@@ -1,0 +1,36 @@
+env:
+  global:
+    - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+    - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+
+language: java
+
+install:
+  - pip install awscli
+  - export PATH=$PATH:$HOME/.local/bin
+jdk:
+  - openjdk17
+
+addons:
+  chrome: stable
+
+before_script:
+  # Execute the cleanup script to clean or delete data inside the folder
+  - ./cleanup.sh
+
+script:
+  - aws --version
+  - mvn clean test -P pwa_sanity
+
+after_script:
+  - cd $TRAVIS_BUILD_DIR
+  - currentDateTime=$(date '+%d-%m-%Y')
+  - aws s3 cp Report s3://aktivolabs-qa-automation-reports/pwa-web-automation/${currentDateTime}_build_$TRAVIS_BUILD_NUMBER/ --recursive
+
+
+notifications:
+  email:
+    recipients:
+      - frederick@aktivolabs.com
+    on_success: always
+    on_failure: always
