@@ -25,7 +25,7 @@ script:
 after_script:
   - cd $TRAVIS_BUILD_DIR
   - currentDateTime=$(date '+%d-%m-%Y')
-  - aws s3 cp Report s3://aktivolabs-qa-automation-reports/pwa-web-automation/${currentDateTime}_build_$TRAVIS_BUILD_NUMBER/ --recursive
+  - aws s3 cp Report s3://bimbs-pwa/${currentDateTime}_build_$TRAVIS_BUILD_NUMBER/ --recursive
 
 
 notifications:
